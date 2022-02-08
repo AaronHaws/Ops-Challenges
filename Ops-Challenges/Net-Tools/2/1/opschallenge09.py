@@ -1,18 +1,25 @@
 #! Python3
 
-def list():{
-    "1": 'Bird'
-    "2": 'Cat'
-    "3": 'Wolf'
-    "4": 'Bear'
-    "5": 'Fish'
-    "6": 'Worm'
-    "7": 'Dog'
-    "8": 'Rat'
-    "9": 'Cow'
-    "10": 'Monkey'
-}
+from pickle import APPEND
 
-Print("4")
+
+def list():{"""
+1 = ONE
+2 = two
+3 = three
+4 = four
+5 = five
+6 = six
+7 = seven
+8 = eight
+9 = nine
+10 = ten
+"""}
+
+print('4' in (list))
+print('6 - 10' in (list))
+APPEND('7 = onion')
+
+
 
 
