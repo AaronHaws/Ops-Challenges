@@ -1,7 +1,6 @@
-# python3
+#! python3
 import os
 import ipaddress
-
 
 WhoAmI = (os)
 IpA = (ipaddress)
@@ -9,8 +8,8 @@ IpA = (ipaddress)
 def IpA():
     if(os.name == "nt"):
       os.system("ipconfig")
-    else(os.name == "unix"):
-      os.system("ifconfig")
+    else(os.name == "nt"):
+      os.system("ipconfig")
 
 
-print (f"{WhoAmI, ipA}")
+print (f"{WhoAmI, (IpA), (lshw)}")
