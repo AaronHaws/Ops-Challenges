@@ -14,13 +14,6 @@ if response.status_code == 200:
     print('Success!')
 elif response.status_code == 404:
     print('Not Found.')
-requests.post('https://api.github.com')
-# this is a test
-requests.put('https://api.github.com')
-
-requests.delete('https://api.github.com')
-
-requests.head('https://api.github.com')
 
 
 
