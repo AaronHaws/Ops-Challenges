@@ -1,0 +1,24 @@
+$Attributes = @{
+
+   Enabled = $true
+   ChangePasswordAtLogon = $true
+
+   UserPrincipalName = "ferdi@GlobeXpower.com"
+   Name = "Franz.Ferdinand"
+   GivenName = "Franz"
+   Surname = "Ferdinand"
+   DisplayName = "F.Ferdinand"
+   Description = "This is the account for Franz."
+
+
+   Company = "Globex.com"
+   Department = "TPS"
+   Title = "TPS reporting guy"
+   City = "Springfield"
+   State = "Oregon"
+
+   AccountPassword = "Testing123" | ConvertTo-SecureString -AsPlainText -Force
+
+}
+
+New-ADUser @Attributes
