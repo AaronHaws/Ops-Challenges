@@ -6,25 +6,25 @@ from time import sleep
 
 host = input('What is the IP? ')
 delay = input('How often do you want to check the host (seconds)? ')
-# emailTo = input('in the event the server goes down what email would you like to be notified?')
-# password = input('please supply your email password')
-# port = 587
-# context = ssl.create_default_context()
+emailTo = input('in the event the server goes down what email would you like to be notified?')
+password = input('please supply your email password')
+port = 587
+context = ssl.create_default_context()
 
 
-# def send_email(subject, message):    
-#     with smtplib.SMTP('smtp-mail.outlook.com', port) as server:
-#         server.ehlo()  # Can be omitted
-#         server.starttls(context=context)
-#         server.ehlo()  # Can be omitted
-#         server.login(emailTo, password)
-#         server.sendmail(emailTo, emailTo, f"""From: {emailTo}
-# Subject: {subject}
+def send_email(subject, message):    
+    with smtplib.SMTP('smtp-mail.outlook.com', port) as server:
+        server.ehlo()  # Can be omitted
+        server.starttls(context=context)
+        server.ehlo()  # Can be omitted
+        server.login(emailTo, password)
+        server.sendmail(emailTo, emailTo, f"""From: {emailTo}
+Subject: {subject}
 
-# {message}
-# """)
-#     server.close()
-#     print("Email sent")
+{message}
+""")
+    server.close()
+    print("Email sent")
     
 
 def send_ping_request():
