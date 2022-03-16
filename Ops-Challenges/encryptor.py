@@ -8,8 +8,6 @@ from cryptography.fernet import Fernet
 
 def menu():
     choice = input("""
-     
-     
      .--------.
     / .------. \\
    / /        \\ \\
@@ -19,40 +17,97 @@ def menu():
 '._____ ____ _____.'
 |     .'____'.     |
 '.__.'.'    '.'.__.'
-'.__  | HAWS |  __.'
+'.__  | JAKE |  __.'
 |   '.'.____.'.'   |
 '.____'.____.'____.'
 '.________________.'
-
 What would you like to do
-
-  1 - Encrypt 
-  2 - Decrypt
-  3 - Quit
-
+  1 - Encrypt File
+  2 - Decrypt File 
+  3 - Encrypt Message 
+  4 - Decrypt Message
+  5 - Encrypt Directory
+  6 - Decrypt Directory
+  7 - Quit
   Please select a number: """)
 
     if choice == '1':
+        print("Encrypt File")
+        filePath = input("What File should I Encrypt?")
+        if exists(filePath):
+            encrypt_file(filePath)
+        else:
+            print('[!] Invalid File Choice')
+    elif choice == '2':
+        filePath = input("What File should I Decrypt?")
+        if exists(filePath):
+            decrypt_file(filePath)
+        else:
+            print('[!] Invalid File Choice')
+    elif choice == '3':
         message = input("Please provide your message: ")
         encrypt_message(message.encode())
-    elif choice == '2':
+    elif choice == '4':
         message = input("Please provide your encrypted message: ")
         decrypt_message(message.encode())
-    elif choice == '3':
+    elif choice == '5':
+        print('Encrypt Directory')
+        dirname = input('Which Directory ')
+        encrypt_directory(dirname)
+    elif choice == '6':
+        print('Decrypt Directory')
+        dirname = input('Which Directory ')
+        decrypt_directory(dirname)
+    elif choice == '7':
         print('Fine Leave!!!')
-        print('but first I\'ll waste your time')
-        sleep(2)
         os.system('clear')
         exit(1)
-    sleep(3)
+    countdown(3)
     os.system('clear')
     menu()
 
 
+def encrypt_directory(dirname):
+    for path, dirnames, files in os.walk(dirname):
+        for file in files:
+            filePath = os.path.join(path, file)
+            print(f'Encrypting File {filePath}')
+            encrypt_file(filePath)
+
+def decrypt_directory(dirname):
+    for path, dirnames, files in os.walk(dirname):
+        for file in files:
+            filePath = os.path.join(path, file)
+            print(f'Decrypting File {filePath}')
+            decrypt_file(filePath)
+
+
+def decrypt_file(filePath):
+    file = open(f'{filePath}', 'rb')
+    contents = file.read()
+    file.close()
+    decrypted_message = decrypt_message(contents)
+    file = open(filePath, 'wb')
+    file.write(decrypted_message.encode())
+    file.close()
+
+def encrypt_file(filePath):
+    file = open(filePath, 'rb')
+    contents = file.read()
+    file.close()
+    encrypted_message = encrypt_message(contents)
+    file = open(f'{filePath}', 'wb')
+    file.write(encrypted_message.encode())
+    file.close()
+
+def countdown(seconds):
+    while(seconds > 0):
+        print(seconds)
+        sleep(1)
+        seconds -= 1
 
 def load_or_generate_key():
     key_exists = exists('secret.key')
-
     if key_exists:
         loaded_key = open('secret.key', 'rb').read()
         cryptoligist = Fernet(loaded_key)
@@ -71,12 +126,15 @@ def encrypt_message(message):
     print(f"""-------------encrypted_message----------
 {encrypted_message}
     """)
+    return encrypted_message
     
 
 
 def decrypt_message(message):
     decrypted_message = (cryptoligist.decrypt(message)).decode()
     print(f"{decrypted_message}")
+    pc.copy(decrypted_message)
+    return decrypted_message
 
 
 cryptoligist = load_or_generate_key()
