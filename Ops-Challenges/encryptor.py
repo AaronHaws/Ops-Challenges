@@ -1,7 +1,7 @@
 import os
 from os.path import exists
 from time import sleep
-
+import pyautogui
 import clipboard as pc
 from cryptography.fernet import Fernet
 
