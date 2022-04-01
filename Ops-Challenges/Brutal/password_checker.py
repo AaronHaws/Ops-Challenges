@@ -1,7 +1,5 @@
 from time import sleep
-
 import pwnedpasswords
-
 
 def load_password_list():
     useList = input("Use your own list? y/N")
